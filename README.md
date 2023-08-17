@@ -1,66 +1,149 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Document Management API 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Documents
 
-## About Laravel
+### Function `index`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This function returns a list of all valid documents in JSON format.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**HTTP Method:** GET  
+**Endpoint:** `/api/documents`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Success Response:**
 
-## Learning Laravel
+`{
+    "message": "Listing all valid documents",
+    "data": [
+        {
+            "id": 1,
+            "title": "Document Title 1",
+            "doctype_id": 1,
+            "created_at": "2023-08-17T12:34:56Z",
+            "updated_at": "2023-08-17T12:34:56Z"
+            // ... other document properties
+        },
+        // ... more documents
+    ]
+}` 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Function `store`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This function creates a new document with the provided details.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**HTTP Method:** POST  
+**Endpoint:** `/api/documents`
 
-## Laravel Sponsors
+**Request Body:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+`{
+    "title": "New Document Title",
+    "doctype_id": 2,
+    "fields": [
+        {
+            "column_id": 1,
+            "text": "Text for Column 1"
+        },
+        // ... more fields
+    ]
+}` 
 
-### Premium Partners
+**Success Response:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+`{
+    "message": "New Document created.",
+    "data": {
+        "id": 2,
+        "title": "New Document Title",
+        "doctype_id": 2,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other document properties
+    }
+}` 
 
-## Contributing
+### Function `update`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This function updates an existing document with the provided details.
 
-## Code of Conduct
+**HTTP Method:** PUT  
+**Endpoint:** `/api/documents/{id}`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Request Body:**
 
-## Security Vulnerabilities
+`{
+    "title": "Updated Document Title",
+    "doctype_id": 3,
+    "fields": [
+        {
+            "column_id": 1,
+            "text": "Updated Text for Column 1"
+        },
+        // ... more fields
+    ]
+}` 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Success Response:**
 
-## License
+`{
+    "message": "Document updated.",
+    "data": {
+        "id": 3,
+        "title": "Updated Document Title",
+        "doctype_id": 3,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other document properties
+    }
+}` 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Function `destroy`
+
+This function deletes an existing document.
+
+**HTTP Method:** DELETE  
+**Endpoint:** `/api/documents/{id}`
+
+**Success Response:**
+
+`{
+    "message": "Document deleted.",
+    "data": {
+        "id": 4,
+        "title": "Deleted Document Title",
+        "doctype_id": 4,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other document properties
+    }
+}` 
+
+### Function `show`
+
+This function returns details of a specific document.
+
+**HTTP Method:** GET  
+**Endpoint:** `/api/documents/{id}`
+
+**Success Response:**
+
+`{
+    "message": "Showing document data.",
+    "data": {
+        "id": 5,
+        "title": "Document Title 5",
+        "doctype_id": 5,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other document properties
+    }
+}` 
+
+### Function `download`
+
+This function generates and downloads a PDF based on the document's view template.
+
+**HTTP Method:** GET  
+**Endpoint:** `/api/documents/{id}/download`
+
+**Success Response:** The PDF is generated and downloaded through the user's browser.
+
