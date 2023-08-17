@@ -1,5 +1,6 @@
 # Document Management API 
 
+![enter image description here](https://logos-download.com/wp-content/uploads/2016/09/Laravel_logo_wordmark_logotype.png)
 
 ## Document Type
 
