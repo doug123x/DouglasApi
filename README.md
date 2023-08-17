@@ -126,6 +126,131 @@ This function deletes an existing document type.
     }
 }`
 
+
+## Column
+
+### Function `index`
+
+This function returns a list of all valid columns for documents in JSON format.
+
+**HTTP Method:** GET  
+**Endpoint:** `/api/columns`
+
+**Success Response:**
+
+`{
+    "data": [
+        {
+            "id": 1,
+            "name": "Column 1",
+            "doctype_id": 1,
+            "created_at": "2023-08-17T12:34:56Z",
+            "updated_at": "2023-08-17T12:34:56Z"
+            // ... other column properties
+        },
+        // ... more columns
+    ],
+    "message": "Listing all valid columns for documents"
+}` 
+
+### Function `store`
+
+This function creates a new column with the provided details.
+
+**HTTP Method:** POST  
+**Endpoint:** `/api/columns`
+
+**Request Body:**
+
+`{
+    "name": "New Column",
+    "doctype_id": 2
+}` 
+
+**Success Response:**
+
+`{
+    "data": {
+        "id": 2,
+        "name": "New Column",
+        "doctype_id": 2,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other column properties
+    },
+    "message": "New type of column created."
+}` 
+
+### Function `update`
+
+This function updates an existing column with the provided details.
+
+**HTTP Method:** PUT  
+**Endpoint:** `/api/columns/{id}`
+
+**Request Body:**
+
+`{
+    "name": "Updated Column",
+    "doctype_id": 3
+}` 
+
+**Success Response:**
+
+`{
+    "data": {
+        "id": 3,
+        "name": "Updated Column",
+        "doctype_id": 3,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other column properties
+    },
+    "message": "Column updated."
+}` 
+
+### Function `show`
+
+This function returns details of a specific column.
+
+**HTTP Method:** GET  
+**Endpoint:** `/api/columns/{id}`
+
+**Success Response:**
+
+`{
+    "message": "Showing Column data",
+    "data": {
+        "id": 4,
+        "name": "Column 4",
+        "doctype_id": 4,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other column properties
+    }
+}` 
+
+### Function `destroy`
+
+This function deletes an existing column.
+
+**HTTP Method:** DELETE  
+**Endpoint:** `/api/columns/{id}`
+
+**Success Response:**
+
+`{
+    "message": "Column deleted",
+    "data": {
+        "id": 5,
+        "name": "Deleted Column",
+        "doctype_id": 5,
+        "created_at": "2023-08-17T12:34:56Z",
+        "updated_at": "2023-08-17T12:34:56Z"
+        // ... other column properties
+    }
+}`
+
 ## Documents
 
 ### Function `index`
